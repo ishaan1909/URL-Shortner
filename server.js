@@ -7,9 +7,18 @@ const shortUrl = require("./models/shortUrl");
 const app = express();
 // app.use(bodyParser.urlencoded({ extended: false }))
 mongoose.set('strictQuery', false); // due to deprication warning
-mongoose.connect('mongodb://localhost/urlShortner',{
-    useNewUrlParser:true , useUnifiedTopology:true
-})
+
+// mongoose.connect('mongodb://localhost/urlShortner',{
+//     useNewUrlParser:true , useUnifiedTopology:true
+// })
+
+mongoose.connect(
+    process.env.MONGO_URL,
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+    () => {
+      console.log('Connected to MongoDB');
+    }
+  );
 
 app.set("view engine","ejs");
 app.use(express.urlencoded({extended:true}))
