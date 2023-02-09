@@ -18,8 +18,8 @@ app.post('/shortUrl',async(req,res)=>{
     res.redirect("/")    
 })
 app.get("/",async (req,res)=>{
-    const shortUrls= await shortUrl.find()
-    res.render('index',{shortUrls:shortUrls});
+    const shortUrls= await shortUrl.find();
+    res.render('index',{shortUrls:shortUrls.slice(-1)});
 })
 
 app.get('/:shortUrl',async(req,res)=>{
